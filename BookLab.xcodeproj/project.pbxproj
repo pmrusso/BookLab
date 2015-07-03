@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46A0F5371B44AA23001DCDD9 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */; };
+		46E5C2331B4497E800989AD6 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C2321B4497E800989AD6 /* RestApiManager.swift */; };
 		46E85C641B35640F005E2106 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E85C631B35640F005E2106 /* AppDelegate.swift */; };
-		46E85C661B35640F005E2106 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E85C651B35640F005E2106 /* ViewController.swift */; };
+		46E85C661B35640F005E2106 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E85C651B35640F005E2106 /* AddBookViewController.swift */; };
 		46E85C691B35640F005E2106 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E85C671B35640F005E2106 /* Main.storyboard */; };
 		46E85C6B1B35640F005E2106 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E85C6A1B35640F005E2106 /* Images.xcassets */; };
 		46E85C6E1B35640F005E2106 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E85C6C1B35640F005E2106 /* LaunchScreen.xib */; };
 		46E85C7A1B35640F005E2106 /* BookLabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E85C791B35640F005E2106 /* BookLabTests.swift */; };
+		46FB881E1B43F30400887819 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB881D1B43F30400887819 /* BooksViewController.swift */; };
+		46FB88201B43F61200887819 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB881F1B43F61200887819 /* BookCell.swift */; };
+		46FB88221B43F79E00887819 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB88211B43F79E00887819 /* Book.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +31,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		46E5C2321B4497E800989AD6 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		46E85C5E1B35640F005E2106 /* BookLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E85C621B35640F005E2106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46E85C631B35640F005E2106 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		46E85C651B35640F005E2106 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		46E85C651B35640F005E2106 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		46E85C681B35640F005E2106 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46E85C6A1B35640F005E2106 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		46E85C6D1B35640F005E2106 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		46E85C731B35640F005E2106 /* BookLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E85C781B35640F005E2106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46E85C791B35640F005E2106 /* BookLabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLabTests.swift; sourceTree = "<group>"; };
+		46FB881D1B43F30400887819 /* BooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
+		46FB881F1B43F61200887819 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		46FB88211B43F79E00887819 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +88,16 @@
 			isa = PBXGroup;
 			children = (
 				46E85C631B35640F005E2106 /* AppDelegate.swift */,
-				46E85C651B35640F005E2106 /* ViewController.swift */,
-				46E85C671B35640F005E2106 /* Main.storyboard */,
+				46E5C2321B4497E800989AD6 /* RestApiManager.swift */,
+				46E85C651B35640F005E2106 /* AddBookViewController.swift */,
+				46FB88211B43F79E00887819 /* Book.swift */,
 				46E85C6A1B35640F005E2106 /* Images.xcassets */,
 				46E85C6C1B35640F005E2106 /* LaunchScreen.xib */,
+				46E85C671B35640F005E2106 /* Main.storyboard */,
+				46FB881D1B43F30400887819 /* BooksViewController.swift */,
 				46E85C611B35640F005E2106 /* Supporting Files */,
+				46FB881F1B43F61200887819 /* BookCell.swift */,
+				46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */,
 			);
 			path = BookLab;
 			sourceTree = "<group>";
@@ -212,7 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46E85C661B35640F005E2106 /* ViewController.swift in Sources */,
+				46FB88201B43F61200887819 /* BookCell.swift in Sources */,
+				46FB881E1B43F30400887819 /* BooksViewController.swift in Sources */,
+				46E85C661B35640F005E2106 /* AddBookViewController.swift in Sources */,
+				46FB88221B43F79E00887819 /* Book.swift in Sources */,
+				46E5C2331B4497E800989AD6 /* RestApiManager.swift in Sources */,
+				46A0F5371B44AA23001DCDD9 /* SwiftyJSON.swift in Sources */,
 				46E85C641B35640F005E2106 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +431,7 @@
 				46E85C7F1B35640F005E2106 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46E85C801B35640F005E2106 /* Build configuration list for PBXNativeTarget "BookLabTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +440,7 @@
 				46E85C821B35640F005E2106 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
