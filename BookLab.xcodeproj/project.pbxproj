@@ -18,6 +18,7 @@
 		46FB881E1B43F30400887819 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB881D1B43F30400887819 /* BooksViewController.swift */; };
 		46FB88201B43F61200887819 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB881F1B43F61200887819 /* BookCell.swift */; };
 		46FB88221B43F79E00887819 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FB88211B43F79E00887819 /* Book.swift */; };
+		8FF3ED4A1B4B00DC00BAA8C5 /* BookDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF3ED491B4B00DC00BAA8C5 /* BookDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		46FB881D1B43F30400887819 /* BooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
 		46FB881F1B43F61200887819 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		46FB88211B43F79E00887819 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		8FF3ED491B4B00DC00BAA8C5 /* BookDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				46E85C601B35640F005E2106 /* BookLab */,
 				46E85C761B35640F005E2106 /* BookLabTests */,
 				46E85C5F1B35640F005E2106 /* Products */,
+				8F7BBC271B4AC74D002DF4E2 /* External */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,17 +90,16 @@
 		46E85C601B35640F005E2106 /* BookLab */ = {
 			isa = PBXGroup;
 			children = (
+				8FF3ED481B4B00B400BAA8C5 /* Data Sources */,
+				8F7BBC261B4AC51E002DF4E2 /* View Controllers */,
 				46E85C631B35640F005E2106 /* AppDelegate.swift */,
 				46E5C2321B4497E800989AD6 /* RestApiManager.swift */,
-				46E85C651B35640F005E2106 /* AddBookViewController.swift */,
-				46FB88211B43F79E00887819 /* Book.swift */,
+				8F7BBC281B4AC92A002DF4E2 /* Models */,
 				46E85C6A1B35640F005E2106 /* Images.xcassets */,
 				46E85C6C1B35640F005E2106 /* LaunchScreen.xib */,
 				46E85C671B35640F005E2106 /* Main.storyboard */,
-				46FB881D1B43F30400887819 /* BooksViewController.swift */,
 				46E85C611B35640F005E2106 /* Supporting Files */,
 				46FB881F1B43F61200887819 /* BookCell.swift */,
-				46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */,
 			);
 			path = BookLab;
 			sourceTree = "<group>";
@@ -125,6 +127,40 @@
 				46E85C781B35640F005E2106 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8F7BBC261B4AC51E002DF4E2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				46E85C651B35640F005E2106 /* AddBookViewController.swift */,
+				46FB881D1B43F30400887819 /* BooksViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		8F7BBC271B4AC74D002DF4E2 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */,
+			);
+			name = External;
+			path = BookLab;
+			sourceTree = "<group>";
+		};
+		8F7BBC281B4AC92A002DF4E2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				46FB88211B43F79E00887819 /* Book.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8FF3ED481B4B00B400BAA8C5 /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8FF3ED491B4B00DC00BAA8C5 /* BookDataSource.swift */,
+			);
+			name = "Data Sources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46FB88201B43F61200887819 /* BookCell.swift in Sources */,
+				8FF3ED4A1B4B00DC00BAA8C5 /* BookDataSource.swift in Sources */,
 				46FB881E1B43F30400887819 /* BooksViewController.swift in Sources */,
 				46E85C661B35640F005E2106 /* AddBookViewController.swift in Sources */,
 				46FB88221B43F79E00887819 /* Book.swift in Sources */,

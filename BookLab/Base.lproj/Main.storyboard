@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="dRY-i9-h42">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="dRY-i9-h42">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Add Book-->
@@ -109,10 +109,10 @@
             </objects>
             <point key="canvasLocation" x="-170" y="257"/>
         </scene>
-        <!--Books-->
+        <!--Books View Controller-->
         <scene sceneID="EhL-vy-S4t">
             <objects>
-                <tableViewController id="Ggq-hO-oAn" customClass="BooksViewController" customModule="BookLab" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Ggq-hO-oAn" userLabel="Books View Controller" customClass="BooksViewController" customModule="BookLab" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="x8G-P3-2xj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,13 +163,17 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Ggq-hO-oAn" id="0zr-7U-EzH"/>
-                            <outlet property="delegate" destination="Ggq-hO-oAn" id="2Ac-Nc-fIk"/>
+                            <outlet property="dataSource" destination="Q4I-hC-WzW" id="OO6-4q-mzw"/>
+                            <outlet property="delegate" destination="Ggq-hO-oAn" id="62v-Yw-T48"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Books" id="m1c-9I-bh5"/>
+                    <connections>
+                        <outlet property="dataSource" destination="Q4I-hC-WzW" id="4IN-UN-c1U"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbd-Yo-wc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Q4I-hC-WzW" userLabel="Book Data Source" customClass="BookDataSource" customModule="BookLab" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="854" y="-147"/>
         </scene>

@@ -8,111 +8,43 @@
 
 import UIKit
 
-class BooksViewController: UITableViewController, UITableViewDelegate {
+class BooksViewController: UITableViewController, BookDataSourceDelegate {
     
     
-    var items = NSMutableArray()
+    @IBOutlet weak var dataSource : BookDataSource!
+  
 
-    override func viewWillAppear(animated: Bool) {
-        items.removeAllObjects()
-        self.showAllBooks()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        dataSource.delegate = self
+        dataSource.showAllBooks()
+       
     }
     
-    func showAllBooks(){
-        RestApiManager.sharedInstance.getAllBooks { json in
-        let books = json["books"]
-        for (index:String, book:JSON) in books {
-            let item: AnyObject = book.object
-            self.items.addObject(item)
-            dispatch_async(dispatch_get_main_queue(),{
-            tableView?.reloadData()
-            })
-        }
-      }
+    
+    
+    func dataSourceCallback(data: BookDataSource, error: NSError?, books: NSMutableArray) {
+        println("callback")
+        tableView.reloadData()
+        println("callbackend")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return self.items.count
-    }
-
+    
     
     @IBAction func onSwitch(sender: AnyObject) {
-        var package:JSON = JSON(self.items[sender.tag])
         
         let option = sender as! UISwitch
-        
-        package["read"].boolValue = (option.on)
-        
-        RestApiManager.sharedInstance.updateBook(package, onCompletion: {json in self.items[sender.tag] = json.object})
-        
-        
+        println(sender.tag)
+        dataSource.updateBook(sender.tag, option: option.on)
         
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
-
-        // Configure the cell...
-        
-        
-        cell.readSwitch.addTarget(self, action: Selector("onSwitch:"), forControlEvents: UIControlEvents.ValueChanged)
-        cell.readSwitch.tag = indexPath.row
-
-        
-        let book:JSON = JSON(self.items[indexPath.row])
-        
-        cell.title.text = book["title"].string
-        cell.author.text = book["author"].string
-        cell.readSwitch.setOn((book["read"].boolValue), animated: false)
-        
-        return cell
-    }
+  
     
-    func callDelete(indexPath: NSIndexPath)
-    {
-        RestApiManager.sharedInstance.deleteBook(JSON(self.items[indexPath.row]), onCompletion: {resp in
-            let respo = resp as! NSHTTPURLResponse
-            if (respo.statusCode == 204){
-                self.viewWillAppear(true)
-            }
-        })
-    }
     
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        var deleteAlert = UIAlertController(title: "Delete Book", message: "Do you wish to delete this bool?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        deleteAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(action: UIAlertAction!) in self.callDelete(indexPath)}))
-        
-        deleteAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: {(action: UIAlertAction!) in println("No")}))
-        
-        presentViewController(deleteAlert, animated: true, completion: nil)
-    }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
