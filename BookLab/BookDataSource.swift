@@ -10,48 +10,35 @@
 import UIKit
 
 protocol BookDataSourceDelegate {
-    func dataSourceCallback(data: BookDataSource, error: NSError?, books: NSMutableArray)
+    func dataSourceCallback(data: BookDataSource, error: NSError?, books: [Book])
 }
 
 class BookDataSource: NSObject, UITableViewDataSource {
     
-    var items = NSMutableArray()
+    var items = [Book]()
     var delegate: BookDataSourceDelegate?
     
     
-    subscript(index: Int) -> AnyObject {
+    subscript(index: Int) -> Book {
         return items[index]
     }
     
+    func reset() {
+        items = [Book]()
+    }
     
     func showAllBooks(){
-        RestApiManager.sharedInstance.getAllBooks { json in
-            let books = json["books"]
-            for (index:String, book:JSON) in books {
-                let item: AnyObject = book.object
-                self.items.addObject(item)
-                println("show books")
-                dispatch_async(dispatch_get_main_queue(),{
-                    delegate?.dataSourceCallback(self, error: nil, books: items)
-                })
-            }
+        RestApiManager.sharedInstance.getAllBooks { books in
+                self.items = books
+                self.delegate?.dataSourceCallback(self, error: nil, books: self.items)
+               
         }
     }
     
-    
-    func updateBook(index: Int, option: Bool){
-        
-        var package:JSON = JSON(self.items[index])
-        
-        package["read"].boolValue = (option)
-
-        RestApiManager.sharedInstance.updateBook(package, onCompletion: {json in ()})
-    }
-    
-    
-    func callDelete(indexPath: NSIndexPath)
+    private func callDelete(book: Book)
     {
-        RestApiManager.sharedInstance.deleteBook(JSON(self.items[indexPath.row]), onCompletion: {resp in
+        
+        RestApiManager.sharedInstance.deleteBook(book.uri, onCompletion: {resp in
             let respo = resp as! NSHTTPURLResponse
             if (respo.statusCode == 204){
                 //self.viewWillAppear(true)
@@ -59,45 +46,31 @@ class BookDataSource: NSObject, UITableViewDataSource {
         })
     }
     
-    
-    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        var deleteAlert = UIAlertController(title: "Delete Book", message: "Do you wish to delete this bool?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        deleteAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(action: UIAlertAction!) in self.callDelete(indexPath)}))
-        
-        deleteAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: {(action: UIAlertAction!) in println("No")}))
-        
-        //presentViewController(deleteAlert, animated: true, completion: nil)
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let book = self[indexPath.row]
+            items.removeAtIndex(indexPath.row)
+            self.callDelete(book)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
     }
-
     
+
+    private func configBookCell(cell: BookCell, indexPath: NSIndexPath){
+        let bookViewModel = BookSummaryViewModel(book: items[indexPath.row])
+        cell.setupWithViewModel(bookViewModel)
+    }
     
     
     func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
             let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
-            
-            // Configure the cell...
-            
-            println("config cell")
-            
-            /*cell.readSwitch.addTarget(self, action: Selector("onSwitch:"), forControlEvents: UIControlEvents.ValueChanged)*/
-            cell.readSwitch.tag = indexPath.row
-            
-            
-            let book:JSON = JSON(self.items[indexPath.row])
-            
-            cell.title.text = book["title"].string
-            cell.author.text = book["author"].string
-            cell.readSwitch.setOn((book["read"].boolValue), animated: false)
-            
+            self.configBookCell(cell, indexPath: indexPath)
             return cell
    
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {       
         return self.items.count;
     }
 }

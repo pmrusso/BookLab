@@ -15,18 +15,36 @@ class RestApiManager: NSObject {
     
     let baseURL = "http://interview.locationlabs.com"
     
-    func getAllBooks(onCompletion: (JSON) -> Void) {
+    func getAllBooks(onCompletion: ([Book]) -> Void) {
         let route = baseURL+"/book"
         makeHTTPGetRequest(route, onCompletion: { json, err in
-            onCompletion(json as JSON)
+            let list = json["books"].object as! [NSDictionary]
+            let books = map(list, { (var bookJSON) -> Book in
+                let json: JSON = JSON(bookJSON)
+                return self.bookFromJSON(json as JSON)
+            })
+            dispatch_async(dispatch_get_main_queue(),{
+                onCompletion(books as [Book])})
         })
     }
     
-    func updateBook(package: JSON, onCompletion: (JSON) -> Void){
-        let route = baseURL + package["uri"].string!
+    func getBook(uri: String, onCompletion: (Book) -> Void){
+        let route = baseURL+uri;
+        println(route);
+        makeHTTPGetRequest(route, onCompletion: {json, err in
+            let book: Book = self.bookFromJSON(json)
+            dispatch_async(dispatch_get_main_queue(),{
+                onCompletion(book as Book)})
+            
+        })
+    }
+    
+    
+    func updateBook(bookuri: String!, read: Bool, onCompletion: (JSON) -> Void){
+        let route = baseURL + bookuri //package["uri"].string!
         
         var body:JSON = [:]
-        body["read"].boolValue = package["read"].boolValue
+        body["read"].boolValue = read
         
         makeHTTPPutRequest(route, body: body.dictionaryObject!, onCompletion: { json, err in
             if json != nil{
@@ -38,9 +56,10 @@ class RestApiManager: NSObject {
         })
     }
     
-    func deleteBook(package: JSON, onCompletion: (NSURLResponse)-> Void) {
-        let route = baseURL + package["uri"].string!
+    func deleteBook(uri: String?, onCompletion: (NSURLResponse)-> Void) {
         
+        let route = baseURL + uri!
+        println(route)
         makeHTTPDeleteRequest(route, onCompletion: {
             response in onCompletion(response as NSURLResponse)
             })
@@ -117,7 +136,9 @@ class RestApiManager: NSObject {
         task.resume()
     }
     
-   
+    func bookFromJSON(book: JSON) -> Book {
+        return Book(uri: book["uri"].string!, title: book["title"].string!, author: book["author"].string!, read: book["read"].boolValue)
+    }
     
     
 }

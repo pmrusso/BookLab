@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BooksViewController: UITableViewController, BookDataSourceDelegate {
+class BooksViewController: UITableViewController, BookDataSourceDelegate, AddBookViewControllerDelegate {
     
     
     @IBOutlet weak var dataSource : BookDataSource!
@@ -18,76 +18,47 @@ class BooksViewController: UITableViewController, BookDataSourceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-        dataSource.showAllBooks()
-       
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (dataSource.items.count == 0){
+            dataSource.showAllBooks()
+        }
     }
     
     
-    
-    func dataSourceCallback(data: BookDataSource, error: NSError?, books: NSMutableArray) {
+    func dataSourceCallback(data: BookDataSource, error: NSError?, books: [Book]) {
         println("callback")
         tableView.reloadData()
         println("callbackend")
     }
 
-
-    
-    
-    @IBAction func onSwitch(sender: AnyObject) {
-        
-        let option = sender as! UISwitch
-        println(sender.tag)
-        dataSource.updateBook(sender.tag, option: option.on)
-        
+    func didAddNewBook() {
+        println("here")
+        dataSource.reset()
+        tableView.reloadData()
     }
     
-  
-    
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
+        // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        switch (segue.identifier!){
+            case "showSingleBook":
+                if let indexPath = self.tableView.indexPathForSelectedRow() {
+                    let book = dataSource[indexPath.row]
+                    (segue.destinationViewController as! BookViewController).bookuri = book.uri}
+                break
+            case "AddBook":
+                let navigationController = segue.destinationViewController as! UINavigationController
+                (navigationController.topViewController as! AddBookViewController).delegate = self
+                break
+            default:
+                break
+        }
     }
-    */
+
+    
 
 }

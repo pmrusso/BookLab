@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol AddBookViewControllerDelegate {
+    func didAddNewBook()
+}
+
 class AddBookViewController: UIViewController {
     
     @IBOutlet var bookTitle: UITextField!
     @IBOutlet var author: UITextField!
     @IBOutlet var readSwitch: UISwitch!
 
+    var delegate: AddBookViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,6 +34,7 @@ class AddBookViewController: UIViewController {
         self.bookTitle.text = ""
         self.author.text = ""
         self.readSwitch.setOn(false, animated: false)
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -43,7 +50,7 @@ class AddBookViewController: UIViewController {
             let respo = response as! NSHTTPURLResponse
             
             if (respo.statusCode == 201){
-                //is to clear form but cannot seem to do it because of thread stuff
+                self.delegate?.didAddNewBook()
             }
             
         })

@@ -24,5 +24,9 @@ class BookCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setupWithViewModel(bookViewModel: BookSummaryViewModel) {
+        self.title?.text = bookViewModel.title
+    }
 
 }
