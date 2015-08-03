@@ -48,7 +48,10 @@ class BooksViewController: UITableViewController, BookDataSourceDelegate, AddBoo
             case "showSingleBook":
                 if let indexPath = self.tableView.indexPathForSelectedRow() {
                     let book = dataSource[indexPath.row]
-                    (segue.destinationViewController as! BookViewController).bookuri = book.uri}
+                    let dest = segue.destinationViewController as! BookViewController
+                    dest.bookuri = book.uri
+                }
+                    //(segue.destinationViewController as! BookViewController).bookuri = book.uri}
                 break
             case "AddBook":
                 let navigationController = segue.destinationViewController as! UINavigationController
