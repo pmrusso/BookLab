@@ -15,7 +15,7 @@ class RestApiManager: NSObject {
     
     let baseURL = "http://interview.locationlabs.com"
     
-    func getAllBooks(onCompletion: ([Book]) -> Void) {
+    func getAllBooks(onCompletion: ([Book], NSError?) -> Void) {
         let route = baseURL+"/book"
         makeHTTPGetRequest(route, onCompletion: { json, err in
             let list = json["books"].object as! [NSDictionary]
@@ -24,7 +24,7 @@ class RestApiManager: NSObject {
                 return self.bookFromJSON(json as JSON)
             })
             dispatch_async(dispatch_get_main_queue(),{
-                onCompletion(books as [Book])})
+                onCompletion(books as [Book], err as NSError?)})
         })
     }
     
@@ -50,7 +50,7 @@ class RestApiManager: NSObject {
             if json != nil{
                 onCompletion(json as JSON)
             } else {
-                println(err)
+                presentError(err)
             }
             
         })

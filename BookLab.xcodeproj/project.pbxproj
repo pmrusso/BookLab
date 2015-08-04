@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		461DB5E81B5FAA8B00093290 /* BookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461DB5E71B5FAA8B00093290 /* BookTableViewController.swift */; };
+		46615FAF1B70CB3E002B43CE /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46615FAE1B70CB3E002B43CE /* UIHelper.swift */; };
 		46A0F5371B44AA23001DCDD9 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */; };
 		46E5C2331B4497E800989AD6 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C2321B4497E800989AD6 /* RestApiManager.swift */; };
 		46E85C641B35640F005E2106 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E85C631B35640F005E2106 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		461DB5E71B5FAA8B00093290 /* BookTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewController.swift; sourceTree = "<group>"; };
+		46615FAE1B70CB3E002B43CE /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		46A0F5361B44AA23001DCDD9 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		46E5C2321B4497E800989AD6 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		46E85C5E1B35640F005E2106 /* BookLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46615FAD1B70CB26002B43CE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				46615FAE1B70CB3E002B43CE /* UIHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		46E85C551B35640F005E2106 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +108,7 @@
 		46E85C601B35640F005E2106 /* BookLab */ = {
 			isa = PBXGroup;
 			children = (
+				46615FAD1B70CB26002B43CE /* Helpers */,
 				46FC08E31B6281AE006E0012 /* Views */,
 				46FC08E01B6280A8006E0012 /* View Models */,
 				8FF3ED481B4B00B400BAA8C5 /* Data Sources */,
@@ -291,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46615FAF1B70CB3E002B43CE /* UIHelper.swift in Sources */,
 				46FB88201B43F61200887819 /* BookCell.swift in Sources */,
 				8FF3ED4A1B4B00DC00BAA8C5 /* BookDataSource.swift in Sources */,
 				46FB881E1B43F30400887819 /* BooksViewController.swift in Sources */,

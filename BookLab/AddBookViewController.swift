@@ -22,6 +22,7 @@ class AddBookViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem?.enabled = validate()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -30,12 +31,20 @@ class AddBookViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func textChanged(sender: AnyObject?){
+        navigationItem.rightBarButtonItem?.enabled = validate()
+    }
+    
     @IBAction func clearForm(){
         self.bookTitle.text = ""
         self.author.text = ""
         self.readSwitch.setOn(false, animated: false)
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    private func validate() -> Bool {
+        return !bookTitle.text.isEmpty && !author.text.isEmpty
     }
     
     @IBAction func addBook(){
@@ -49,6 +58,9 @@ class AddBookViewController: UITableViewController {
             let respo = response as! NSHTTPURLResponse
             if (respo.statusCode == 201){
                 self.delegate?.didAddNewBook(json)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }else {
+                presentError(NSError(domain: "API Domain", code: respo.statusCode, userInfo: nil))
             }
             
         })

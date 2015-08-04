@@ -28,9 +28,9 @@ class BookDataSource: NSObject, UITableViewDataSource {
     }
     
     func showAllBooks(){
-        RestApiManager.sharedInstance.getAllBooks { books in
+        RestApiManager.sharedInstance.getAllBooks { books, err in
                 self.items = books
-                self.delegate?.dataSourceCallback(self, error: nil, books: self.items)
+                self.delegate?.dataSourceCallback(self, error: err, books: self.items)
                
         }
     }

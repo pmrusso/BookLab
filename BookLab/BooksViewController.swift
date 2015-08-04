@@ -22,21 +22,18 @@ class BooksViewController: UITableViewController, BookDataSourceDelegate, AddBoo
         self.navigationItem.leftBarButtonItem = self.editButtonItem()        
     }
     
-    /*override func viewWillAppear(animated: Bool) {
-        if (dataSource.items.count == 0){
-            dataSource.showAllBooks()
-        }
-    }*/
     
     
     func dataSourceCallback(data: BookDataSource, error: NSError?, books: [Book]) {
-        println("callback")
-        tableView.reloadData()
-        println("callbackend")
+        if (error != nil){
+          presentError(error)
+        }
+        else {
+           tableView.reloadData()
+        }
     }
 
     func didAddNewBook(json: JSON) {
-        println("here")
         dataSource.reset()
         dataSource.addBook(json)
         tableView.reloadData()
