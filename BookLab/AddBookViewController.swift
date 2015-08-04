@@ -9,10 +9,10 @@
 import UIKit
 
 protocol AddBookViewControllerDelegate {
-    func didAddNewBook()
+    func didAddNewBook(json: JSON)
 }
 
-class AddBookViewController: UIViewController {
+class AddBookViewController: UITableViewController {
     
     @IBOutlet var bookTitle: UITextField!
     @IBOutlet var author: UITextField!
@@ -44,13 +44,11 @@ class AddBookViewController: UIViewController {
         json["author"].string = author.text
         json["read"].boolValue = readSwitch.on
         
-       
         
         RestApiManager.sharedInstance.addBook(json, onCompletion: {json, response in
             let respo = response as! NSHTTPURLResponse
-            
             if (respo.statusCode == 201){
-                self.delegate?.didAddNewBook()
+                self.delegate?.didAddNewBook(json)
             }
             
         })

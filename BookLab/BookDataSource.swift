@@ -35,6 +35,14 @@ class BookDataSource: NSObject, UITableViewDataSource {
         }
     }
     
+    func addBook(json: JSON){
+        let list = json["books"].object as! [NSDictionary]
+        let books = map(list, { (var bookJSON) -> Book in
+            let json: JSON = JSON(bookJSON)
+            return RestApiManager.sharedInstance.bookFromJSON(json as JSON)})
+        self.items = books
+    }
+    
     private func callDelete(book: Book)
     {
         

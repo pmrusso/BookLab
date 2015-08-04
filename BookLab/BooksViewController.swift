@@ -18,14 +18,15 @@ class BooksViewController: UITableViewController, BookDataSourceDelegate, AddBoo
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        dataSource.showAllBooks()
         self.navigationItem.leftBarButtonItem = self.editButtonItem()        
     }
     
-    override func viewWillAppear(animated: Bool) {
+    /*override func viewWillAppear(animated: Bool) {
         if (dataSource.items.count == 0){
             dataSource.showAllBooks()
         }
-    }
+    }*/
     
     
     func dataSourceCallback(data: BookDataSource, error: NSError?, books: [Book]) {
@@ -34,9 +35,10 @@ class BooksViewController: UITableViewController, BookDataSourceDelegate, AddBoo
         println("callbackend")
     }
 
-    func didAddNewBook() {
+    func didAddNewBook(json: JSON) {
         println("here")
         dataSource.reset()
+        dataSource.addBook(json)
         tableView.reloadData()
     }
     
